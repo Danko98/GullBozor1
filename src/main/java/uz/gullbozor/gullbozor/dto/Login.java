@@ -8,12 +8,13 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-public class SignInDto {
+public class Login {
+
+    @NotNull
+    private String userName; //userning takroriy passwordi
 
     @NotNull
     private String password; //userning passwordi
 
-    @NotNull
-    private String repeatPassword; //userning takroriy passwordi
 
 }

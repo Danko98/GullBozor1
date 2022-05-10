@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface CategoryRepo extends JpaRepository<Category, Long> {
 
-    boolean existsByNameAndIsMain(String name, Integer isMain);
+    boolean existsByNameAndParentCategoryId(String name, Integer parentCategoryId);
 
     //Parent bo'lgan categoryalarni chaqirish uchun
-    List<Category> findAllByIsMain(Integer isMain);
+    List<Category> findAllByParentCategoryId(Integer parentCategoryId);
 
 
 }

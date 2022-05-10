@@ -29,7 +29,9 @@ public class Announce extends BaseEntity {
     private String title;
 
 
+
     private UUID mainAttachId;
+    private Integer flowerType;
     private Long attachmentsId;
     private Long shopId;
     private double height;
@@ -37,6 +39,8 @@ public class Announce extends BaseEntity {
     private double weight;
     private boolean isWithPot;
     private boolean isWithFertilizer;
+    private boolean isAllowed;
+
     private String description;
 
 

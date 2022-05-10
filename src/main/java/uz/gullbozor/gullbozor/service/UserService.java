@@ -1,11 +1,16 @@
 package uz.gullbozor.gullbozor.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uz.gullbozor.gullbozor.apiResponse.ApiResponse;
 import uz.gullbozor.gullbozor.dto.EditUserDto;
+import uz.gullbozor.gullbozor.dto.VerifyDto;
+import uz.gullbozor.gullbozor.dto.RegisterDto;
 import uz.gullbozor.gullbozor.entity.UserEntity;
 import uz.gullbozor.gullbozor.repository.UserRepo;
+import uz.gullbozor.gullbozor.verifysms.PhoneVerificationService;
+import uz.gullbozor.gullbozor.verifysms.VerificationResult;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,21 +21,34 @@ public class UserService {
     @Autowired
     private UserRepo userRepo;
 
+    @Autowired
+    PhoneVerificationService phoneVerificationService;
 
-    public ApiResponse createUser(UserEntity userDto) {
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
-        if (userRepo.existsByUserNameAndPassword(userDto.getUsername(),userDto.getPassword())) {
+    public ApiResponse checkUser(RegisterDto registerDto) {
+
+        if (userRepo.existsByPhoneNumber( registerDto.getPassword())) {
             return new ApiResponse("This Login and Password already exists",false);
         }
-
-        UserEntity user = new UserEntity();
-        user.setUserName(userDto.getUsername());
-        user.setPassword(userDto.getPassword());
-        userRepo.save(user);
-
-        return new ApiResponse("Successfully created",true);
-
+        return null;
     }
+
+    public ApiResponse sendSmsToUser(VerifyDto verifyDto) {
+        if (userRepo.existsByPhoneNumber( verifyDto.getPhoneNumber())) {
+            return new ApiResponse("This phone number already exists",false);
+        }
+
+        VerificationResult result= phoneVerificationService.startVerification(verifyDto.getPhoneNumber());
+        if (result.isValid()) {
+            return new ApiResponse("Otp sent",true);
+        }
+        return new ApiResponse("Otp failed to sent..",false);
+    }
+
+
+
 
     public ApiResponse editUser(EditUserDto userDto, Long id) {
 

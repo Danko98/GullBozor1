@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 public class AnnounceDto {
 
+    private Integer flowerType;
     private Long shopId;
     private Long attachmentsId;
     private Long sellerId;
@@ -22,5 +23,6 @@ public class AnnounceDto {
     private boolean isWithPot;
     private boolean isActive;
     private boolean isWithFertilizer;
+    private boolean isAllowed;
 
 }

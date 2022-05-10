@@ -35,12 +35,10 @@ public class CategoryController {
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
 
-    @GetMapping("/{isParent}")
-    public ResponseEntity<List<Category>> getParentCategoryList(@PathVariable boolean isParent) {
-
-        List<Category> categoryList = categoryService.categoryParentList(isParent);
+    @GetMapping("/allParentCategory")
+    public ResponseEntity<List<Category>> getParentCategoryList() {
+        List<Category> categoryList = categoryService.categoryParentList();
         return ResponseEntity.ok(categoryList);
-
     }
 
     @DeleteMapping("/{id}")

@@ -14,6 +14,9 @@ import uz.gullbozor.gullbozor.repository.AnnounceRepo;
 import uz.gullbozor.gullbozor.repository.CategoryRepo;
 import uz.gullbozor.gullbozor.repository.UserRepo;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,6 +27,9 @@ public class AnnounceService {
 
     @Autowired
     private CategoryRepo categoryRepo;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @Autowired
     private UserRepo userRepo;
@@ -54,6 +60,7 @@ public class AnnounceService {
             announce.setId(announceDto.getAttachmentsId());
         }
 
+        announce.setFlowerType(announceDto.getFlowerType());
         announce.setActive(true);
         announce.setCategory(optionalCategory.get());
         announce.setUserEntity(optionalSellerEntity.get());
@@ -95,6 +102,7 @@ public class AnnounceService {
         Announce announce = optionalAnnounce.get();
 
 
+        announce.setFlowerType(announceDto.getFlowerType());
         announce.setActive(announceDto.isActive());
         announce.setCategory(optionalCategory.get());
         announce.setUserEntity(optionalSellerEntity.get());
@@ -113,6 +121,27 @@ public class AnnounceService {
 
     }
 
+    public List<List<?>> getAnnounceListOfList() {
+
+        List<List<?>> allAnnounceLists = new ArrayList<>();
+
+        List<Category> categoryList = categoryService.categoryParentList();
+
+        allAnnounceLists.add(categoryList);
+
+
+        return Collections.singletonList(allAnnounceLists);
+
+    }  // asosiy index page ga 5 turdadagi elonlarni 7 ta dan va 5 ta asosiy categoryani jo'natadi.
+
+
+
+    public Page<Announce> getAnnounceCustomer(Integer flowerType,int page) {
+        Pageable pageable = PageRequest.of(page, 40);
+        Page<Announce> announcesOfCustomers = announceRepo.findAllByFlowerType(pageable, flowerType);
+            return announcesOfCustomers;
+    }
+
     public ApiResponse getAnnounceById(Long id) {
         if (!announceRepo.existsById(id)) {
             return new ApiResponse("Not found announce",false);
@@ -127,6 +156,22 @@ public class AnnounceService {
         return announceRepo.findAll(pageable);
 
 
+    }
+
+    public Page<Announce> getAnnounceByShopId(Long shopId, int page) {
+
+        Pageable pageable = PageRequest.of(page, 40);
+        return announceRepo.findAllByShopId(shopId, pageable);
+
+
+    }
+
+
+
+
+    public Page<Announce> getAnnouncePageByFlowerType(int page, Integer flowerType) {
+        Pageable pageable = PageRequest.of(page, 20);
+        return announceRepo.findAllByFlowerType(pageable,flowerType);
     }
 
     public ApiResponse deleteAnnounceById(Long id) {

@@ -29,6 +29,7 @@ public class PhoneVerificationService {
         return null;
     }
 
+
     public VerificationResult checkVerification(String phone, String code) {
         try {
             VerificationCheck verification = VerificationCheck.creator(twilioProperties.getServiceSid(), code).setTo(phone).create();

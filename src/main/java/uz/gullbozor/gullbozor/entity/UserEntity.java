@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Set;
@@ -22,12 +23,11 @@ import java.util.Set;
 @Table(name = "users")
 public class UserEntity extends BaseEntity implements UserDetails {
 
-    @Column(name = "phone_number",unique = true)
+    @Column(name = "phone_number",unique = true,nullable = false)
     private String phoneNumber;// telefon raqami
 
-    @Column(name = "first_name",length = 50,nullable = false)
+    @Column(name = "user_name",length = 50,nullable = false)
     private String userName;// ismi
-
 
     @Column(name = "password",nullable = false)
     private String password;// userning passwordi
@@ -35,7 +35,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
     @UpdateTimestamp
     private Timestamp updateAt; // qachon tahrirlanganligi
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
     private boolean accountNonExpired = true; // bu userning amal qilish muddati o'tmaganligi
@@ -46,7 +46,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     private boolean enabled = false; // accauntni Yoniq toki o'chiqligi
 
-    private String emailCode;
+//    private String emailCode;
 
 
     //------------// BU USERDETAILSNI METHODLARI //-----------------

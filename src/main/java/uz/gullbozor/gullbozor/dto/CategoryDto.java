@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 public class CategoryDto {
 
-    private Integer isParent;
+    private Integer parentCategoryId;
     private String name;
 }

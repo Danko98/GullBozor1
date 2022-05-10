@@ -16,9 +16,12 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer isMain;
+
+    @Column(name = "parent_category_id")
+    private Integer parentCategoryId;    // agar qiymat null bo'lsa bu Supper Ota categorya hisoblanadi
 
     @Column(name = "name",nullable = false)
     private String name;
+
 
 }

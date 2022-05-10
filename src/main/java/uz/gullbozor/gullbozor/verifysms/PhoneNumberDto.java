@@ -6,15 +6,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PhoneNumberDto {
-    private String phoneNum;
+    private String phoneNumber;
     private String otp;
 
     public PhoneNumberDto(String phoneNum, String otp) {
-        this.phoneNum = phoneNum;
+        this.phoneNumber = phoneNum;
         this.otp = otp;
     }
 
     public PhoneNumberDto(String phoneNum) {
-        this.phoneNum = phoneNum;
+        this.phoneNumber = phoneNum;
     }
 }

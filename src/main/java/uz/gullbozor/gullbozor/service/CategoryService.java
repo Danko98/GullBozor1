@@ -18,13 +18,13 @@ public class CategoryService {
 
     public ApiResponse addCategory(CategoryDto categoryDto) {
 
-        if (categoryRepo.existsByNameAndIsMain(categoryDto.getName(),categoryDto.getIsParent())) {
+        if (categoryRepo.existsByNameAndParentCategoryId(categoryDto.getName(),categoryDto.getParentCategoryId())) {
             return new ApiResponse("This category already exists",false);
         }
 
         Category category = new Category();
         category.setName(categoryDto.getName());
-        category.setIsMain(categoryDto.getIsParent());
+        category.setParentCategoryId(categoryDto.getParentCategoryId());
         categoryRepo.save(category);
         return new ApiResponse("Successfully saved",true);
 
@@ -36,13 +36,13 @@ public class CategoryService {
             return new ApiResponse("Not found category",false);
         }
 
-        if (categoryRepo.existsByNameAndIsMain(categoryDto.getName(), categoryDto.getIsParent())) {
+        if (categoryRepo.existsByNameAndParentCategoryId(categoryDto.getName(), categoryDto.getParentCategoryId())) {
             return new ApiResponse("This category already exists",false);
         }
 
         Category category = new Category();
         category.setName(categoryDto.getName());
-        category.setIsMain(categoryDto.getIsParent());
+        category.setParentCategoryId(categoryDto.getParentCategoryId());
         categoryRepo.save(category);
         return new ApiResponse("Successfully edited",true);
     }
@@ -57,13 +57,12 @@ public class CategoryService {
         return new ApiResponse(optionalCategory.get());
     }
 
-    public List<Category> categoryParentList(boolean isParent) {
+    public List<Category> categoryParentList() {
 
-        if (isParent) {
-            return categoryRepo.findAllByIsMain(1);
-        }else {
-            return categoryRepo.findAllByIsMain(0);
-        }
+        List<Category> allByParentCategory = categoryRepo.findAllByParentCategoryId(1);
+
+        return allByParentCategory;
+
 
     }
 
