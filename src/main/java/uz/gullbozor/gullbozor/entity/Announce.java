@@ -29,7 +29,6 @@ public class Announce extends BaseEntity {
     private String title;
 
 
-
     private UUID mainAttachId;
     private Integer flowerType;
     private Long attachmentsId;

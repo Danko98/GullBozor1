@@ -16,7 +16,7 @@ public interface AnnounceRepo extends JpaRepository<Announce, Long> {
 
     Page<Announce> findAllByShopId(Long shopId, Pageable pageable);
 
-
+    Page<Announce> findAllByUserEntity_Id(Long userEntity_id, Pageable pageable);
 
    // List<Announce> findByFlowerTypeAndOrderByCreateAtDesc(Integer flowerType);
 

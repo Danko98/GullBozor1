@@ -183,5 +183,9 @@ public class AnnounceService {
     }
 
 
-
+    public Page<Announce> getAnnounceByUserId(Long userId,int page) {
+        Pageable pageable = PageRequest.of(page,10);
+        Page<Announce> announcePage = announceRepo.findAllByUserEntity_Id(userId, pageable);
+        return announcePage;
+    }
 }

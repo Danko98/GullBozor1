@@ -39,6 +39,12 @@ public class AnnounceController {
         return ResponseEntity.ok(announceListByShopId);
     }
 
+    @GetMapping("/byUserId/{userId}")
+    public ResponseEntity<?> getAnnounceByUserId(@PathVariable Long userId, @RequestParam int page) {
+        Page<Announce> announcePage = announceService.getAnnounceByUserId(userId, page);
+        return ResponseEntity.ok(announcePage);
+    }
+
     @PostMapping
     public ResponseEntity<?> addAnnounce(@RequestBody AnnounceDto announceDto) {
         ApiResponse apiResponse = announceService.addAnnounce(announceDto);
