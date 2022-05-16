@@ -13,18 +13,18 @@ import java.util.List;
 public interface AnnounceRepo extends JpaRepository<Announce, Long> {
 
     Page<Announce> findAllByFlowerType(Pageable pageable, Integer flowerType);
-
+//
     Page<Announce> findAllByShopId(Long shopId, Pageable pageable);
-
-    Page<Announce> findAllByUserEntity_Id(Long userEntity_id, Pageable pageable);
-
-   // List<Announce> findByFlowerTypeAndOrderByCreateAtDesc(Integer flowerType);
-
-
-    List<Announce> findTop7ByFlowerTypeOrderByCreateAtDesc(Integer flowerType);
-
-    List<Announce> findTop7ByFlowerTypeAndCreateAtGreaterThanEqualOrderByCreateAtDesc(Integer flowerType, Timestamp createAt);
-
+//
+//    Page<Announce> findAllByUserEntity_Id(Long userEntity_id, Pageable pageable);
+//
+//   // List<Announce> findByFlowerTypeAndOrderByCreateAtDesc(Integer flowerType);
+//
+//
+//    List<Announce> findTop7ByFlowerTypeOrderByCreateAtDesc(Integer flowerType);
+//
+//    List<Announce> findTop7ByFlowerTypeAndCreateAtGreaterThanEqualOrderByCreateAtDesc(Integer flowerType, Timestamp createAt);
+//
 
 
 

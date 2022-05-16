@@ -17,16 +17,12 @@ import java.util.UUID;
 public class Attach {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    @Column(name = "id", updatable = false, nullable = false)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private Long announceContactId;
+    private Long mainAttachId;
 
+    private String name;
     private String fileOriginalName;
     private Long size;
     private String contentType;

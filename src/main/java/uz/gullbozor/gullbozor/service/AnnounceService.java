@@ -36,17 +36,17 @@ public class AnnounceService {
 
     public ApiResponse addAnnounce(AnnounceDto announceDto) {
 
-        if (!categoryRepo.existsById(announceDto.getCategoryId())) {
-            return new ApiResponse("Not found announce",false);
-        }
-
-        if (!userRepo.existsById(announceDto.getSellerId())) {
-            return new ApiResponse("Not found Seller",false);
-        }
-
-
-        Optional<Category> optionalCategory = categoryRepo.findById(announceDto.getCategoryId());
-        Optional<UserEntity> optionalSellerEntity = userRepo.findById(announceDto.getSellerId());
+//        if (!categoryRepo.existsById(announceDto.getCategoryId())) {
+//            return new ApiResponse("Not found announce",false);
+//        }
+//
+//        if (!userRepo.existsById(announceDto.getSellerId())) {
+//            return new ApiResponse("Not found Seller",false);
+//        }
+//
+//
+//        Optional<Category> optionalCategory = categoryRepo.findById(announceDto.getCategoryId());
+//        Optional<UserEntity> optionalSellerEntity = userRepo.findById(announceDto.getSellerId());
 
         Announce announce = new Announce();
 
@@ -56,15 +56,13 @@ public class AnnounceService {
             announce.setId(announceDto.getMainAttachId());
         }
 
-        if (announceDto.getAttachmentsId() != null) {
-            announce.setId(announceDto.getAttachmentsId());
-        }
+
 
         announce.setFlowerType(announceDto.getFlowerType());
         announce.setActive(true);
-        announce.setCategory(optionalCategory.get());
-        announce.setUserEntity(optionalSellerEntity.get());
-        //announce.setAttachMain();
+//        announce.setCategory(optionalCategory.get());
+//        announce.setUserEntity(optionalSellerEntity.get());
+        announce.setMainAttachId(announceDto.getMainAttachId());
         announce.setDescription(announceDto.getDescription());
         announce.setDiameter(announceDto.getDiameter());
         announce.setHeight(announceDto.getHeight());
@@ -104,8 +102,8 @@ public class AnnounceService {
 
         announce.setFlowerType(announceDto.getFlowerType());
         announce.setActive(announceDto.isActive());
-        announce.setCategory(optionalCategory.get());
-        announce.setUserEntity(optionalSellerEntity.get());
+//        announce.setCategory(optionalCategory.get());
+//        announce.setUserEntity(optionalSellerEntity.get());
         //announce.setAttachMain();
         announce.setDescription(announceDto.getDescription());
         announce.setDiameter(announceDto.getDiameter());
@@ -154,8 +152,10 @@ public class AnnounceService {
 
         Pageable pageable = PageRequest.of(page, 20);
         return announceRepo.findAll(pageable);
+    }
 
-
+    public List<Announce> getAnnounceList() {
+        return announceRepo.findAll();
     }
 
     public Page<Announce> getAnnounceByShopId(Long shopId, int page) {
@@ -183,9 +183,9 @@ public class AnnounceService {
     }
 
 
-    public Page<Announce> getAnnounceByUserId(Long userId,int page) {
-        Pageable pageable = PageRequest.of(page,10);
-        Page<Announce> announcePage = announceRepo.findAllByUserEntity_Id(userId, pageable);
-        return announcePage;
-    }
+//    public Page<Announce> getAnnounceByUserId(Long userId,int page) {
+//        Pageable pageable = PageRequest.of(page,10);
+//        Page<Announce> announcePage = announceRepo.findAllByUserEntity_Id(userId, pageable);
+//        return announcePage;
+//    }
 }

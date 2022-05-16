@@ -13,11 +13,11 @@ import java.util.UUID;
 @Table(name = "announce")
 public class Announce extends BaseEntity {
 
-    @ManyToOne
-    private UserEntity userEntity;
-
-    @ManyToOne
-    private Category category;
+//    @ManyToOne
+//    private UserEntity userEntity;
+//
+//    @ManyToOne
+//    private Category category;
 
     @Column(name = "price")
     private double price;
@@ -29,9 +29,8 @@ public class Announce extends BaseEntity {
     private String title;
 
 
-    private UUID mainAttachId;
+    private Long mainAttachId;
     private Integer flowerType;
-    private Long attachmentsId;
     private Long shopId;
     private double height;
     private double diameter;

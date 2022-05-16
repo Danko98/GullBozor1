@@ -10,7 +10,6 @@ public class AnnounceDto {
 
     private Integer flowerType;
     private Long shopId;
-    private Long attachmentsId;
     private Long sellerId;
     private Long mainAttachId;
     private Long categoryId;

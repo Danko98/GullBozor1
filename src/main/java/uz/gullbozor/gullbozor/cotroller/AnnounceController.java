@@ -12,7 +12,7 @@ import uz.gullbozor.gullbozor.service.AnnounceService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/announce")
+@RequestMapping("/announce")
 public class AnnounceController {
 
     @Autowired
@@ -39,11 +39,11 @@ public class AnnounceController {
         return ResponseEntity.ok(announceListByShopId);
     }
 
-    @GetMapping("/byUserId/{userId}")
-    public ResponseEntity<?> getAnnounceByUserId(@PathVariable Long userId, @RequestParam int page) {
-        Page<Announce> announcePage = announceService.getAnnounceByUserId(userId, page);
-        return ResponseEntity.ok(announcePage);
-    }
+//    @GetMapping("/byUserId/{userId}")
+//    public ResponseEntity<?> getAnnounceByUserId(@PathVariable Long userId, @RequestParam int page) {
+//        Page<Announce> announcePage = announceService.getAnnounceByUserId(userId, page);
+//        return ResponseEntity.ok(announcePage);
+//    }
 
     @PostMapping
     public ResponseEntity<?> addAnnounce(@RequestBody AnnounceDto announceDto) {
@@ -61,6 +61,11 @@ public class AnnounceController {
     public ResponseEntity<?> getAnnounceById(@PathVariable Long id) {
         ApiResponse apiResponse = announceService.getAnnounceById(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
+
+    @GetMapping("/announceList")
+    public List<Announce> getAnnounceList() {
+        return announceService.getAnnounceList();
     }
 
     @GetMapping

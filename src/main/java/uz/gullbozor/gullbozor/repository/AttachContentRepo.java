@@ -10,6 +10,5 @@ import java.util.UUID;
 
 public interface AttachContentRepo extends JpaRepository<AttachContent, UUID> {
 
-    Optional<AttachContent> findByAttachId(UUID attach_id);
-    List<Optional<AttachContent>> findAllByAttach_AnnounceContactId(Long attach_announceContactId);
+
 }
